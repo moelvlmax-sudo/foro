@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cómo organizar un foro efectivo · Guía interactiva</title>
+<meta name="description" content="Guía profesional interactiva para organizar foros efectivos: fases, roles y herramientas.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Fraunces:wght@600;700&display=swap" rel="stylesheet">
+<script>document.documentElement.className='js'</script>
+<style>
+/* ===== VARIABLES ===== */
+:root{color-scheme:dark;--bg:#0F1115;--bg2:#171A21;--tx:#ECECF1;--mu:#A7AABA;--ac:#FF5C39;--ac2:#6C5CE7;--bd:rgba(255,255,255,.12);--r:16px;
+--c-pres:#FF6B6B;--c-mod:#4DA3FF;--c-sec:#FFB02E;--c-pan:#2ED47A;--c-pub:#A394FF;--c-com:#2EC4B6;
+--sh:0 4px 6px rgba(0,0,0,.2),0 10px 20px rgba(0,0,0,.3);--sp:clamp(4rem,10vh,8rem);--navh:3.5rem}
+/* ===== RESET Y BASE ===== */
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-top:var(--navh)}
+body{background:var(--bg);color:var(--tx);font:400 clamp(1rem,1.2vw,1.125rem)/1.65 Inter,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3,h4{font-family:Fraunces,Georgia,serif;font-weight:700;line-height:1.15}
+h2{font-size:clamp(1.9rem,4vw,2.9rem);margin-bottom:1.2rem}
+h3{font-size:1.25rem;margin-bottom:.5rem}
+p+p,p+ul,ul+p{margin-top:.8rem}
+ul{padding-left:1.2rem}
+:focus-visible{outline:3px solid var(--ac);outline-offset:3px}
+/* ===== UTILIDADES ===== */
+.wrap{max-width:1200px;margin:auto;padding:0 1.25rem}
+section{padding:var(--sp) 0}
+.mu{color:var(--mu)}
+.lead{max-width:62ch;margin-bottom:2rem}
+.card{background:rgba(255,255,255,.04);border:1px solid var(--bd);border-radius:var(--r);padding:1.4rem;backdrop-filter:blur(8px);transition:transform .3s,box-shadow .3s}
+.card:hover{transform:translateY(-6px);box-shadow:var(--sh)}
+.grid{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.js .rv{opacity:0;translate:0 30px;transition:opacity .7s,translate .7s}
+.js .rv.in{opacity:1;translate:none}
+.btn{position:relative;overflow:hidden;display:inline-block;border:0;border-radius:99px;padding:.85rem 1.7rem;background:var(--ac);color:#0F1115;font:600 1rem Inter,sans-serif;cursor:pointer;text-decoration:none;transition:transform .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn.sm{padding:.4rem 1rem;font-size:.9rem;margin-top:.8rem}
+.rp{position:absolute;width:10px;height:10px;margin:-5px;border-radius:50%;background:rgba(255,255,255,.55);animation:rp .6s forwards}
+@keyframes rp{to{transform:scale(30);opacity:0}}
+.chip{border:1px solid var(--bd);background:transparent;color:var(--tx);border-radius:99px;padding:.4rem 1rem;cursor:pointer;font:inherit;font-size:.95rem;transition:background .2s}
+.chip:hover{background:rgba(255,255,255,.08)}
+.chip[aria-pressed=true]{background:var(--ac2);border-color:var(--ac2)}
+.ul{background:linear-gradient(var(--ac),var(--ac)) 0 100%/0 2px no-repeat;transition:background-size .3s;text-decoration:none}
+.ul:hover{background-size:100% 2px}
+/* ===== NAVEGACIÓN ===== */
+#bar{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--ac);transform:scaleX(0);transform-origin:left;z-index:60}
+nav{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(15,17,21,.88);backdrop-filter:blur(12px);border-bottom:1px solid var(--bd);transform:translateY(-100%);transition:transform .4s}
+nav.on{transform:none}
+nav ul{list-style:none;display:flex;gap:.25rem;padding:.6rem 1rem;overflow-x:auto;max-width:1200px;margin:auto}
+nav a{display:block;padding:.35rem .9rem;border-radius:99px;text-decoration:none;font-size:.92rem;color:var(--mu);white-space:nowrap;transition:background .2s,color .2s}
+nav a:hover{color:var(--tx)}
+nav a.act{background:var(--ac);color:#0F1115}
+/* ===== HERO ===== */
+.hero{min-height:100svh;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;padding:2rem 1.25rem}
+.hero::before{content:"";position:absolute;inset:-30%;background:radial-gradient(circle at 20% 30%,rgba(255,92,57,.35),transparent 40%),radial-gradient(circle at 80% 60%,rgba(108,92,231,.4),transparent 45%);animation:mesh 18s ease-in-out infinite alternate}
+@keyframes mesh{to{transform:rotate(15deg) scale(1.15) translate(4%,3%)}}
+.hero>div{position:relative}
+h1{font-size:clamp(2.3rem,7vw,4.8rem);max-width:15ch;margin:0 auto}
+h1 .w{display:inline-block;opacity:0;translate:0 .6em;animation:up .8s forwards}
+@keyframes up{to{opacity:1;translate:none}}
+.hero .sub{font-size:1.25rem;color:var(--mu);margin:1rem 0 0}
+.stats{display:flex;gap:clamp(1rem,4vw,3rem);justify-content:center;margin:2rem 0;font-size:1.1rem;flex-wrap:wrap}
+.stats b{font:700 2.4rem Fraunces,serif;color:var(--ac);margin-right:.35rem}
+.chev{display:block;margin:2.5rem auto 0;animation:bounce 1.6s infinite}
+@keyframes bounce{50%{translate:0 10px}}
+/* ===== SECCIÓN MARCO ===== */
+.def{border-left:4px solid var(--ac);max-width:70ch;margin-bottom:1.2rem}
+.tc .tag{display:inline-block;margin:.25rem .25rem 0 0;padding:.15rem .7rem;border-radius:99px;background:rgba(108,92,231,.25);font-size:.9rem}
+.tc:not(.off){animation:pop .45s}
+.tc.off{display:none}
+@keyframes pop{from{opacity:0;scale:.9}}
+.filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.2rem}
+.pr-list{list-style:none;padding:0;counter-reset:p;max-width:70ch;display:grid;gap:.6rem}
+.pr-list details{border:1px solid var(--bd);border-radius:12px;background:rgba(255,255,255,.04)}
+.pr-list summary,.steps summary{cursor:pointer;list-style:none;padding:.9rem 1.2rem;display:flex;gap:1rem;align-items:baseline;font-weight:600}
+summary::-webkit-details-marker{display:none}
+.pr-list summary::before{content:counter(p);counter-increment:p;font:700 1.5rem Fraunces,serif;color:var(--ac)}
+.pr-list p,.steps p{padding:0 1.2rem 1rem}
+.pr-list p{padding-left:2.9rem}
+/* ===== SECCIÓN FASE I ===== */
+.tl{position:relative;padding-left:2.5rem}
+.tl-line{position:absolute;left:.5rem;top:0;width:4px;height:100%}
+.tl-line line{stroke-width:3;stroke:var(--bd)}
+.tl-line .pr{stroke:var(--ac);stroke-dasharray:1;stroke-dashoffset:1}
+.node{position:relative;margin-bottom:2.5rem}
+.node::before{content:"";position:absolute;left:calc(-2rem - 5px);top:.45rem;width:14px;height:14px;border-radius:50%;background:var(--ac);box-shadow:0 0 0 5px var(--bg)}
+.chk{display:grid;gap:.3rem;margin:.8rem 0}
+.chk label{display:flex;gap:.6rem;cursor:pointer}
+.chk input{accent-color:var(--ac);width:1.1rem;height:1.1rem;margin-top:.35rem}
+.cmp{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));margin-top:1rem}
+.cmp div{border-radius:12px;padding:1.1rem;border:1px solid var(--bd);opacity:.7;transition:opacity .3s,border-color .3s,transform .3s}
+.cmp div:hover,.cmp div:focus-within{opacity:1;transform:scale(1.02)}
+.cmp .ok:hover{border-color:var(--c-pan)}
+.cmp .no:hover{border-color:var(--c-pres)}
+.cmp b{display:block;margin-bottom:.3rem}
+.cmp .ok b{color:var(--c-pan)}
+.cmp .no b{color:var(--c-pres)}
+.org-grid{list-style:none;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.6rem;margin:.8rem 0}
+.org-grid li:first-child{grid-column:1/-1}
+.org-grid .chip{width:100%;border-radius:12px;padding:.7rem}
+.js .org-grid .d{display:none}
+.org-grid .d{display:block;font-size:.95rem;color:var(--mu);margin-top:.3rem}
+#orgp{min-height:5rem;border-left:4px solid var(--ac2);padding:.2rem 0 .2rem 1rem;display:none}
+.js #orgp{display:block}
+.steps details{border:1px solid var(--bd);border-radius:12px;margin-top:.5rem;background:rgba(255,255,255,.04)}
+.steps details[open] summary{color:var(--ac)}
+/* ===== SECCIÓN ROLES ===== */
+.tgl{display:none;gap:.5rem;margin-bottom:1.2rem}
+.js .tgl{display:flex}
+.wheelv{display:none;gap:1.5rem;grid-template-columns:minmax(0,1fr);align-items:center}
+.js .wheelv.show{display:grid}
+@media(min-width:900px){.wheelv{grid-template-columns:1fr 1fr}}
+.js .cards.hide{display:none}
+#wheel{width:100%;max-width:440px;margin:auto}
+#wheel .nd{cursor:pointer;transform-box:fill-box;transform-origin:center;transition:transform .35s}
+#wheel .nd:hover,#wheel .nd.on{transform:scale(1.18)}
+#wheel .nd:focus-visible{outline:none}
+#wheel .nd:focus-visible circle{stroke-width:5;filter:drop-shadow(0 0 8px var(--c))}
+#wheel .nd circle{fill:var(--bg2);stroke:var(--c);stroke-width:3;transition:fill .3s}
+#wheel .nd.on circle,#wheel .nd[aria-pressed="true"] circle{fill:var(--c);filter:drop-shadow(0 0 10px var(--c))}
+#wheel text{fill:var(--tx);font:600 13px Inter,sans-serif;text-anchor:middle;pointer-events:none}
+#wheel .nd.on text,#wheel .nd[aria-pressed="true"] text{fill:#0F1115}
+#wheel .hub{fill:none;stroke:var(--bd);stroke-dasharray:4 6}
+#links line{stroke:var(--mu);stroke-width:1.5;stroke-dasharray:1;stroke-dashoffset:1;animation:draw .8s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+#wp{border:1px solid var(--bd);border-top:4px solid var(--c,var(--ac));border-radius:var(--r);padding:1.4rem;background:rgba(255,255,255,.04)}
+.role{border-top:4px solid var(--c)}
+.role h3{color:var(--c)}
+.ico{width:34px;height:34px;fill:none;stroke:var(--c);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;margin-bottom:.6rem;transition:transform .4s}
+.role:hover .ico{animation:bounce .6s 2}
+.badge{display:inline-block;padding:.2rem .8rem;border-radius:99px;background:var(--c,var(--ac));color:#0F1115;font-size:.88rem;font-weight:600}
+.body{display:grid;grid-template-rows:1fr;margin-top:.6rem}
+.js .body{grid-template-rows:0fr;transition:grid-template-rows .4s}
+.js .open .body{grid-template-rows:1fr}
+.body>div{overflow:hidden}
+.tg{display:none}
+.js .tg{display:inline-block}
+/* ===== FOOTER ===== */
+footer{border-top:1px solid var(--bd);padding:3rem 0;background:var(--bg2)}
+footer ul{list-style:none;padding:0;display:flex;gap:1.2rem;flex-wrap:wrap;margin:1.2rem 0}
+/* ===== MATRIZ, FASES III-IV, CHECKLISTS, DISPOSICIONES ===== */
+.js .rv.card{transition:opacity .7s,translate .7s,transform .3s,box-shadow .3s}
+.fl{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0;align-items:center}
+.fl input,.num{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;color:var(--tx);padding:.5rem .8rem;font:inherit;font-size:.95rem}
+.num{width:6rem}
+.tw{overflow-x:auto;border:1px solid var(--bd);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;min-width:640px}
+th,td{padding:.8rem 1rem;text-align:left;border-bottom:1px solid var(--bd);vertical-align:top}
+thead th{background:var(--bg2);font-family:Fraunces,serif}
+tbody tr{transition:background .2s}tbody tr:hover{background:rgba(255,92,57,.14)}
+.sim{max-width:760px}
+.opt{display:block;width:100%;text-align:left;margin-top:.6rem;padding:.8rem 1rem;border-radius:12px;border:1px solid var(--bd);background:transparent;color:var(--tx);font:inherit;cursor:pointer;transition:transform .2s,border-color .2s}
+.opt:hover{transform:translateX(6px);border-color:var(--ac)}
+.opt.ok{border-color:var(--c-pan);background:rgba(46,212,122,.15);animation:pop .4s}
+.opt.no{border-color:var(--c-pres);background:rgba(255,107,107,.15);animation:shake .4s}
+.opt[aria-pressed="true"]{font-weight:600}
+@keyframes shake{25%{translate:-6px}75%{translate:6px}}
+.flips{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.flip{perspective:900px;background:none;border:0;color:inherit;font:inherit;height:170px;cursor:pointer;text-align:center}
+.flip:focus-visible .f{outline:3px solid var(--ac);outline-offset:4px;border-radius:var(--r)}
+.flip .f{position:relative;display:block;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip.on .f{transform:rotateY(180deg)}
+@media(hover:hover){.flip:hover .f{transform:rotateY(180deg)}}
+.flip .s{position:absolute;inset:0;display:grid;place-items:center;padding:1rem;border-radius:var(--r);border:1px solid var(--bd);backface-visibility:hidden}
+.flip .fr{background:var(--bg2);font:700 1.2rem Fraunces,serif}
+.flip .bk{background:var(--ac2);transform:rotateY(180deg)}
+.car{display:flex;gap:1rem;overflow-x:auto;scroll-snap-type:x mandatory;padding:.4rem .2rem 1rem}
+.car>article{flex:0 0 min(80%,320px);scroll-snap-align:start}
+.tm{display:grid;gap:1.5rem;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));align-items:center}
+.ring{width:200px;margin:auto;display:block}
+.ring circle{fill:none;stroke-width:10}
+.ring .bg{stroke:var(--bd)}
+.ring .fg{stroke:var(--c-pan);stroke-linecap:round;transform:rotate(-90deg);transform-origin:center;stroke-dasharray:339.3;stroke-dashoffset:339.3;transition:stroke-dashoffset .25s linear,stroke .4s}
+.ring text{fill:var(--tx);font:700 26px Fraunces,serif;text-anchor:middle}
+.fw{overflow-x:auto;margin:1.5rem 0}
+.flow{min-width:640px;width:100%;display:block}
+.flow .st{cursor:help}
+.flow .st rect{fill:var(--bg2);stroke:var(--ac2);stroke-width:2;transition:fill .2s}
+.flow .st:hover rect,.flow .st:focus rect{fill:var(--ac2)}
+.flow .st:focus-visible{outline:none}
+.flow .st:focus-visible rect{stroke:var(--ac);stroke-width:4}
+.flow text{fill:var(--tx);font:600 14px Inter,sans-serif;text-anchor:middle;pointer-events:none}
+.flow .ar{fill:none;stroke:var(--ac);stroke-width:2.5;stroke-linecap:round}
+.js .flow .ar{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .8s}
+.js .flow.in .ar{stroke-dashoffset:0}
+#tip{position:fixed;max-width:240px;padding:.6rem .8rem;border-radius:10px;background:#fff;color:#0F1115;font-size:.9rem;pointer-events:none;opacity:0;transition:opacity .2s;z-index:70}
+#tip.on{opacity:1}
+.big{display:inline-block;padding:.2rem 1.2rem;border-radius:99px;background:var(--ac);color:#0F1115;font:700 2rem Fraunces,serif}
+.cls{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.cls .card{position:relative}
+.cl{list-style:none;padding:0;margin:.8rem 0}
+.ck{position:relative;display:flex;gap:.7rem;align-items:flex-start;padding:.35rem 0;cursor:pointer}
+.ck input{position:absolute;opacity:0}
+.ck svg{flex:none;width:24px;height:24px;margin-top:.2rem}
+.ck rect{fill:none;stroke:var(--mu);stroke-width:2;transition:fill .25s,stroke .25s}
+.ck path{fill:none;stroke:#0F1115;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .35s .1s}
+.ck input:checked+svg rect{fill:var(--ac);stroke:var(--ac)}
+.ck input:checked+svg path{stroke-dashoffset:0}
+.ck input:checked~span{color:var(--mu);text-decoration:line-through}
+.ck input:focus-visible+svg{outline:3px solid var(--ac);outline-offset:2px;border-radius:6px}
+.pb{height:8px;border-radius:99px;background:var(--bd);overflow:hidden}
+.pb i{display:block;height:100%;width:0;background:var(--c-pan);transition:width .4s}
+.cf{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:var(--r)}
+.cf i{position:absolute;top:0;width:8px;height:12px;animation:cf 1.6s ease-out forwards}
+@keyframes cf{to{transform:translate(var(--x),320px) rotate(540deg);opacity:0}}
+@media(prefers-reduced-motion:reduce){.cf{display:none}}
+.ed p{font:600 clamp(1.3rem,2.8vw,2rem)/1.4 Fraunces,serif;max-width:34ch;margin:0 0 1.5rem}
+.ed ul{list-style:none;padding:0 0 0 1.2rem;border-left:4px solid var(--ac);margin:0 0 1.5rem;color:var(--mu);font-size:1.15rem}
+.ed li{margin:.4rem 0}
+/* ===== MENÚ MÓVIL Y CURSOR ===== */
+.hb,.nt{display:none}
+@media(max-width:768px){
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 .5rem 0 1.25rem}
+.nt{display:block;font:700 1.1rem Fraunces,serif}
+.hb{display:flex;flex-direction:column;gap:5px;padding:.9rem;background:none;border:0;cursor:pointer}
+.hb span{width:24px;height:2px;background:var(--tx);transition:transform .3s,opacity .3s}
+.hb[aria-expanded=true] span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+.hb[aria-expanded=true] span:nth-child(2){opacity:0}
+.hb[aria-expanded=true] span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+nav ul{position:absolute;top:100%;left:0;right:0;margin:0;max-width:none;flex-direction:column;background:var(--bg2);border-bottom:1px solid var(--bd);max-height:0;padding:0 1rem;overflow:hidden;visibility:hidden;transition:max-height .35s,padding .35s,visibility 0s .35s}
+nav ul.open{max-height:80vh;padding:.6rem 1rem;visibility:visible;transition-delay:0s}
+nav ul a{padding:.7rem 1rem}
+}
+#cur{position:fixed;left:0;top:0;width:28px;height:28px;margin:-14px 0 0 -14px;border:2px solid var(--ac);border-radius:50%;pointer-events:none;z-index:80;opacity:0;transition:width .25s,height .25s,margin .25s,background .25s,opacity .25s}
+#cur.hv{width:52px;height:52px;margin:-26px 0 0 -26px;background:rgba(255,92,57,.18)}
+/* ===== RESPONSIVE ===== */
+@media(max-width:480px){.stats b{font-size:2rem}}
+/* ===== PREFERS-REDUCED-MOTION ===== */
+@media(prefers-reduced-motion:reduce){*,*::before{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+.js .rv,h1 .w{opacity:1;translate:none}#links line{stroke-dashoffset:0}}
+</style>
+</head>
+<body id="top">
+<div id="bar" aria-hidden="true"></div>
+<nav aria-label="Secciones de la guía"><span class="nt">Foro efectivo</span><button class="hb" aria-label="Abrir menú" aria-expanded="false" aria-controls="nl"><span></span><span></span><span></span></button><ul id="nl">
+<li><a href="#marco">Marco conceptual</a></li><li><a href="#fase1">Fase I</a></li><li><a href="#roles">Roles</a></li><li><a href="#fase3">Fase III</a></li><li><a href="#fase4">Fase IV</a></li><li><a href="#checklists">Checklists</a></li><li><a href="#disposiciones">Disposiciones</a></li>
+</ul></nav>
+
+<header class="hero">
+<div>
+<h1>Cómo organizar un foro efectivo</h1>
+<p class="sub">Guía profesional interactiva</p>
+<p class="stats"><span><b data-n="4">4</b>fases</span><span><b data-n="6">6</b>roles</span><span><b data-n="1">1</b>método</span></p>
+<a class="btn" href="#marco">Comenzar el recorrido</a>
+<svg class="chev" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" role="img" aria-label="Desplázate hacia abajo"><path d="M5 9l7 7 7-7"/></svg>
+</div>
+</header>
+
+<main>
+<!-- ===== MARCO CONCEPTUAL ===== -->
+<section id="marco"><div class="wrap">
+<h2 class="rv">Marco conceptual</h2>
+<div class="card def rv"><h3>Definición operativa</h3>
+<p>Un foro es un espacio estructurado de interacción comunicativa, sincrónico o asincrónico, en el que los participantes, bajo reglas preestablecidas y con roles diferenciados, intercambian argumentos, contrastan posiciones y producen conclusiones sobre un área temática delimitada.</p></div>
+<div class="card def rv"><h3>¿Qué es un foro efectivo?</h3>
+<p>Es el que genera, en un tiempo delimitado, síntesis verificables, acuerdos trazables y aprendizajes transferibles. No se mide por el volumen de intervenciones ni por la asistencia, sino por la calidad de los productos documentales y la equidad en el acceso a la palabra.</p></div>
+
+<h3 class="rv" style="margin-top:3rem">Tipología</h3>
+<div class="filters rv" role="group" aria-label="Filtrar tipología por criterio">
+<button class="chip" aria-pressed="true" data-f="all">Todos</button><button class="chip" aria-pressed="false" data-f="fin">Finalidad</button><button class="chip" aria-pressed="false" data-f="mod">Modalidad</button><button class="chip" aria-pressed="false" data-f="alc">Alcance</button><button class="chip" aria-pressed="false" data-f="dur">Duración</button><button class="chip" aria-pressed="false" data-f="est">Estructura</button>
+</div>
+<div class="grid" id="tipos">
+<article class="card tc" data-k="fin"><h3>Por finalidad</h3><span class="tag">Deliberativo</span><span class="tag">Consultivo</span><span class="tag">Informativo</span><span class="tag">Académico</span><span class="tag">Decisorio</span></article>
+<article class="card tc" data-k="mod"><h3>Por modalidad</h3><span class="tag">Presencial</span><span class="tag">Virtual sincrónico</span><span class="tag">Virtual asincrónico</span><span class="tag">Híbrido</span></article>
+<article class="card tc" data-k="alc"><h3>Por alcance</h3><span class="tag">Interno (organización)</span><span class="tag">Abierto (público general)</span><span class="tag">Cerrado (expertos)</span></article>
+<article class="card tc" data-k="dur"><h3>Por duración</h3><span class="tag">Sesión única</span><span class="tag">Ciclo de sesiones</span><span class="tag">Foro permanente</span></article>
+<article class="card tc" data-k="est"><h3>Por estructura</h3><span class="tag">Plenario único</span><span class="tag">Mesas de trabajo</span><span class="tag">Mixto</span></article>
+</div>
+
+<h3 class="rv" style="margin-top:3rem">Seis principios rectores</h3>
+<ol class="pr-list">
+<li class="rv"><details><summary>Claridad de propósito</summary><p>Todo foro debe responder a un objetivo accionable y verificable.</p></details></li>
+<li class="rv"><details><summary>Equidad participativa</summary><p>Se garantiza el acceso equilibrado a la palabra entre todos los participantes.</p></details></li>
+<li class="rv"><details><summary>Trazabilidad</summary><p>Toda intervención relevante y todo acuerdo debe quedar documentado.</p></details></li>
+<li class="rv"><details><summary>Transparencia</summary><p>Las reglas de participación se comunican con antelación y se aplican de forma homogénea.</p></details></li>
+<li class="rv"><details><summary>Puntualidad</summary><p>El tiempo es un recurso compartido y se administra con rigor.</p></details></li>
+<li class="rv"><details><summary>Respeto argumental</summary><p>Se debate sobre ideas, no sobre personas.</p></details></li>
+</ol>
+</div></section>
+
+<!-- ===== FASE I ===== -->
+<section id="fase1"><div class="wrap">
+<h2 class="rv">Fase I — Diseño y arquitectura (pre-foro)</h2>
+<div class="tl">
+<svg class="tl-line" viewBox="0 0 4 100" preserveAspectRatio="none" aria-hidden="true"><line x1="2" y1="0" x2="2" y2="100"/><line class="pr" x1="2" y1="0" x2="2" y2="100" pathLength="1"/></svg>
+
+<article class="node rv"><h3>Documento de Constitución del Foro</h3>
+<p>Antes de cualquier acción logística, el comité promotor elabora un documento fundacional con, como mínimo:</p>
+<div class="chk">
+<label><input type="checkbox"> Denominación oficial del foro</label>
+<label><input type="checkbox"> Justificación y problema que lo origina</label>
+<label><input type="checkbox"> Objetivo general y objetivos específicos, con verbos accionables</label>
+<label><input type="checkbox"> Público destinatario y perfil de participantes</label>
+<label><input type="checkbox"> Modalidad, fecha, duración y plataforma</label>
+<label><input type="checkbox"> Estructura programática preliminar</label>
+<label><input type="checkbox"> Recursos requeridos y fuentes de financiamiento</label>
+<label><input type="checkbox"> Indicadores de éxito</label>
+</div>
+<p class="mu">Este documento es la línea base contra la cual se evalúa la efectividad del foro.</p></article>
+
+<article class="node rv"><h3>Tema y objetivo no son lo mismo</h3>
+<p><b>Tema:</b> La inteligencia artificial en la educación superior.</p>
+<div class="cmp">
+<div class="ok" tabindex="0"><b>✓ Objetivo correcto</b>Formular tres recomendaciones consensuadas para la implementación ética de IA en el aula.</div>
+<div class="no" tabindex="0"><b>✗ Objetivo incorrecto</b>“Hablar sobre IA en educación”.</div>
+</div>
+<p class="mu">Un objetivo que no permita verificar su cumplimiento al cierre del foro no es un objetivo: es una intención.</p></article>
+
+<article class="node rv"><h3>Comité organizador</h3>
+<p>Equipo reducido (recomendado: 3 a 7 personas) con funciones diferenciadas. Elige un cargo para ver su función.</p>
+<ul class="org-grid">
+<li><button class="chip org" aria-pressed="false">Coordinación general</button><span class="d">Dirección del proyecto y toma de decisiones estratégicas.</span></li>
+<li><button class="chip org" aria-pressed="false">Secretaría técnica</button><span class="d">Documentación, actas y seguimiento de acuerdos.</span></li>
+<li><button class="chip org" aria-pressed="false">Logística</button><span class="d">Sede, plataforma, recursos técnicos y materiales.</span></li>
+<li><button class="chip org" aria-pressed="false">Comunicación</button><span class="d">Convocatoria, difusión, gestión de medios y acreditaciones.</span></li>
+<li><button class="chip org" aria-pressed="false">Enlace con panelistas</button><span class="d">Invitaciones, confirmaciones y recepción de relatorías.</span></li>
+</ul>
+<div id="orgp" aria-live="polite"><p class="mu">Selecciona un cargo.</p></div></article>
+
+<article class="node rv"><h3>Modalidad y plataforma</h3>
+<p>En foros mediados por tecnología, la plataforma determina las reglas de interacción. Criterios de selección:</p>
+<div class="chk">
+<label><input type="checkbox"> Moderación previa de mensajes</label>
+<label><input type="checkbox"> Registro y exportación de intervenciones</label>
+<label><input type="checkbox"> Votaciones o encuestas en tiempo real</label>
+<label><input type="checkbox"> Accesibilidad para personas con discapacidad</label>
+<label><input type="checkbox"> Estabilidad técnica y soporte durante el evento</label>
+</div>
+<p class="mu">En foros asincrónicos se recomienda exigir una intervención propia antes de ver las respuestas de los demás, para preservar la originalidad del pensamiento.</p></article>
+
+<article class="node rv"><h3>Guion programático</h3>
+<p>El guion ordena el flujo del foro en cuatro pasos:</p>
+<div class="steps">
+<details name="g"><summary>1. Apertura</summary><p>Contextualización, presentación de autoridades y enunciación de reglas.</p></details>
+<details name="g"><summary>2. Bloques temáticos</summary><p>Cada bloque con pregunta detonadora, panelistas asignados y tiempo delimitado.</p></details>
+<details name="g"><summary>3. Preguntas del público</summary><p>Con mecanismo definido (presencial o chat).</p></details>
+<details name="g"><summary>4. Cierre</summary><p>Síntesis estructurada, validación de acuerdos y anuncio de próximos pasos.</p></details>
+</div>
+<p>Las preguntas detonadoras se redactan con anticipación: no admiten respuesta binaria, exigen análisis comparativo y se vinculan con el contexto de los participantes.</p></article>
+</div>
+</div></section>
+
+<!-- ===== ROLES ===== -->
+<section id="roles"><div class="wrap">
+<h2 class="rv">Fase II — Roles y responsabilidades</h2>
+<p class="lead rv">La claridad de roles es condición necesaria para la efectividad. Ningún rol es decorativo: cada uno cumple una función específica dentro del ecosistema del foro.</p>
+<div class="tgl" role="group" aria-label="Vista de roles"><button class="chip" data-v="wheel" aria-pressed="true">Rueda</button><button class="chip" data-v="cards" aria-pressed="false">Tarjetas</button></div>
+
+<div class="wheelv">
+<svg id="wheel" viewBox="0 0 400 400" role="group" aria-label="Rueda de roles del foro"><circle class="hub" cx="200" cy="200" r="140"/><g id="links"></g><circle cx="200" cy="200" r="30" fill="#6C5CE7"/><text x="200" y="205">Foro</text><g id="nodes"></g></svg>
+<div id="wp" role="status" aria-live="polite" aria-atomic="true"></div>
+</div>
+
+<div class="grid cards hide" id="cards" style="grid-template-columns:repeat(auto-fit,minmax(280px,1fr))">
+<article class="card role rv" data-s="Presidencia" style="--c:var(--c-pres)">
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l3 6 7 1-5 5 1 7-6-3-6 3 1-7-5-5 7-1z"/></svg>
+<h3>Presidencia del Foro</h3><span class="badge">Entregable: acta final aprobada y acuerdos validados</span>
+<button class="btn sm tg" aria-expanded="false">Ver funciones</button>
+<div class="body"><div>
+<p><b>Naturaleza:</b> autoridad unipersonal de representación y garante del cumplimiento del reglamento.</p>
+<p><b>Funciones</b></p><ul><li>Representar institucionalmente al foro.</li><li>Fijar y aprobar el orden del día.</li><li>Dirigir la actuación general del evento.</li><li>Resolver cuestiones de procedimiento y mociones de orden.</li><li>Visar el acta final y someter los acuerdos a aprobación.</li><li>Decidir sobre el ritmo del debate cuando se desvíe o estanque.</li></ul>
+<p><b>Perfil:</b> autoridad moral o jerárquica reconocida, conocimiento del reglamento, capacidad de escucha y firmeza procedimental.</p>
+</div></div></article>
+
+<article class="card role rv" data-s="Moderación" style="--c:var(--c-mod)">
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v12H8l-4 4z"/></svg>
+<h3>Moderación</h3><span class="badge">Entregable: guion de preguntas detonadoras y síntesis verbal de cierre</span>
+<button class="btn sm tg" aria-expanded="false">Ver funciones</button>
+<div class="body"><div>
+<p><b>Naturaleza:</b> facilitación de procesos grupales y arquitectura del diálogo.</p>
+<p><b>Funciones</b></p><ul><li>Gestionar la palabra y equilibrar la participación.</li><li>Contener a los participantes dominantes y promover a los silentes.</li><li>Gestionar conflictos y aplicar el reglamento de convivencia.</li><li>Eliminar intervenciones ofensivas o fuera de tema.</li><li>Construir síntesis parciales al cierre de cada bloque.</li><li>Formular preguntas de seguimiento en foros asincrónicos.</li><li>Conectar aportes aislados que abordan un mismo punto.</li></ul>
+<p><b>Perfil:</b> escucha activa, síntesis en tiempo real, neutralidad procedimental y manejo de grupos.</p>
+</div></div></article>
+
+<article class="card role rv" data-s="Secretaría" style="--c:var(--c-sec)">
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 2h9l4 4v16H6zM9 11h7M9 15h7"/></svg>
+<h3>Secretaría Técnica / Relatoría</h3><span class="badge">Entregable: acta del foro con acuerdos, responsables y plazos</span>
+<button class="btn sm tg" aria-expanded="false">Ver funciones</button>
+<div class="body"><div><p><b>Naturaleza:</b> guardián de la memoria institucional del foro.</p><p><b>Funciones</b></p><ul><li>Controlar el cumplimiento de los tiempos asignados a cada expositor.</li><li>Registrar asistencia cuando corresponda.</li><li>Redactar el acta del foro.</li><li>Coordinar con la moderación para que síntesis verbal y documento escrito coincidan.</li><li>Enviar el acta a los panelistas para corregir errores factuales.</li><li>Publicar el acta en los canales institucionales.</li></ul><p><b>El acta:</b> no es una transcripción taquigráfica. Contiene acuerdos con responsables y plazos, conclusiones principales, disensos relevantes y tareas pendientes.</p><p><b>Perfil:</b> rigor cronológico, redacción clara y precisión documental.</p></div></div></article>
+<article class="card role rv" data-s="Panelistas" style="--c:var(--c-pan)">
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="8" r="3"/><circle cx="16" cy="8" r="3"/><path d="M2 20c0-4 3-6 6-6s6 2 6 6M12 20c0-3 2-5 5-5s5 2 5 5"/></svg>
+<h3>Panelistas / Relatores</h3><span class="badge">Entregable: relatoría previa y respuestas a preguntas</span>
+<button class="btn sm tg" aria-expanded="false">Ver funciones</button>
+<div class="body"><div><p><b>Naturaleza:</b> proveedores de contenido técnico o vivencial.</p><p><b>Funciones</b></p><ul><li>Entregar la relatoría escrita previa con la antelación establecida.</li><li>Exponer con claridad y dentro del tiempo asignado.</li><li>Escuchar a los demás panelistas y construir sobre sus ideas o refutarlas con datos.</li><li>Responder preguntas del público y de la moderación.</li><li>Revisar el acta para corregir errores factuales.</li></ul><p><b>Perfil:</b> dominio del tema, claridad expositiva y disposición al diálogo horizontal.</p></div></div></article>
+<article class="card role rv" data-s="Público" style="--c:var(--c-pub)">
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-5 4-8 8-8s8 3 8 8"/></svg>
+<h3>Público / Participantes activos</h3><span class="badge">Entregable: preguntas de calidad y, cuando aplique, voto de aprobación</span>
+<button class="btn sm tg" aria-expanded="false">Ver funciones</button>
+<div class="body"><div><p><b>Naturaleza:</b> colectivo legitimador y auditor del debate.</p><p><b>Funciones</b></p><ul><li>Formular preguntas que profundicen o cuestionen los argumentos expuestos.</li><li>Auditar la consistencia de las exposiciones.</li><li>Validar o rechazar las conclusiones, cuando el formato lo contemple.</li><li>Respetar las reglas de participación y los tiempos asignados.</li></ul><p><b>Regla de oro:</b> toda intervención del público se formula como pregunta, no como discurso encubierto. La moderación puede interrumpir las que incumplan esta norma.</p></div></div></article>
+<article class="card role rv" data-s="Comité" style="--c:var(--c-com)">
+<svg class="ico" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>
+<h3>Comité Organizador</h3><span class="badge">Entregable: foro ejecutado y memoria difundida</span>
+<button class="btn sm tg" aria-expanded="false">Ver funciones</button>
+<div class="body"><div><p><b>Naturaleza:</b> responsable de la logística, la convocatoria y la difusión.</p><p><b>Funciones</b></p><ul><li>Ejecutar el plan logístico y técnico.</li><li>Gestionar invitaciones y confirmaciones.</li><li>Difundir el foro por los canales institucionales.</li><li>Asegurar el soporte técnico durante el evento.</li><li>Sistematizar la evaluación post-foro.</li></ul></div></div></article>
+</div>
+<h3 class="rv" style="margin-top:3rem">Matriz sintética de roles</h3>
+<div class="fl mf" role="group" aria-label="Filtrar la matriz"><input data-c="0" placeholder="Filtrar por rol" aria-label="Filtrar por rol"><input data-c="2" placeholder="Filtrar por habilidad" aria-label="Filtrar por habilidad"><input data-c="3" placeholder="Filtrar por entregable" aria-label="Filtrar por entregable"></div>
+<div class="tw rv"><table id="mx"><thead><tr><th>Rol</th><th>Responsabilidad principal</th><th>Habilidad clave</th><th>Entregable</th></tr></thead><tbody>
+<tr><th scope="row">Presidencia</th><td>Representación y cumplimiento del reglamento</td><td>Liderazgo y autoridad</td><td>Acta aprobada</td></tr>
+<tr><th scope="row">Moderación</th><td>Dinamización del diálogo y gestión de la palabra</td><td>Escucha activa y síntesis</td><td>Guion y síntesis de cierre</td></tr>
+<tr><th scope="row">Secretaría Técnica</th><td>Control del tiempo y memoria escrita</td><td>Rigor documental</td><td>Acta con acuerdos y plazos</td></tr>
+<tr><th scope="row">Panelistas</th><td>Aporte de contenido técnico o vivencial</td><td>Claridad y escucha</td><td>Relatoría previa</td></tr>
+<tr><th scope="row">Público</th><td>Auditoría y profundización del debate</td><td>Formulación de preguntas</td><td>Preguntas y validación</td></tr>
+<tr><th scope="row">Comité Organizador</th><td>Logística y difusión</td><td>Gestión de proyectos</td><td>Foro ejecutado y memoria</td></tr>
+</tbody></table></div>
+</div></section>
+
+<!-- ===== FASE III ===== -->
+<section id="fase3"><div class="wrap">
+<h2 class="rv">Fase III — Ejecución y dinámica</h2>
+<h3 class="rv">Simulador: elige un rol</h3>
+<div class="card sim rv"><div class="fl" id="simr" role="group" aria-label="Rol a simular"></div><p id="sims" class="mu">Elige un rol para ver su escenario.</p><div id="simo"></div><p id="simf" role="status" aria-live="polite" style="margin-top:.8rem"></p></div>
+
+<h3 class="rv" style="margin-top:3rem">Protocolo de apertura</h3>
+<p class="rv lead">La sesión inicia con la enunciación expresa del contrato social del foro. Toca cada tarjeta para ver su detalle.</p>
+<div class="flips">
+<button class="flip rv" aria-pressed="false"><span class="f"><span class="s fr">1 · Autoridades y equipo</span><span class="s bk">Presentación de autoridades y equipo organizador.</span></span></button>
+<button class="flip rv" aria-pressed="false"><span class="f"><span class="s fr">2 · Objetivo</span><span class="s bk">Exposición del objetivo del foro.</span></span></button>
+<button class="flip rv" aria-pressed="false"><span class="f"><span class="s fr">3 · Reglas</span><span class="s bk">Enunciación de las reglas de participación: tiempos, mecanismos y conducta.</span></span></button>
+<button class="flip rv" aria-pressed="false"><span class="f"><span class="s fr">4 · Cierre</span><span class="s bk">Explicación de la metodología de cierre y del destino de las conclusiones.</span></span></button>
+</div>
+
+<h3 class="rv" style="margin-top:3rem">Técnicas de dinamización</h3>
+<div class="car" id="car" tabindex="0" aria-label="Técnicas de dinamización">
+<article class="card"><h3>Ronda de apertura</h3><p>Breve: una palabra o frase por participante para activar la palabra.</p></article>
+<article class="card"><h3>Debate dirigido</h3><p>Limitación explícita de turnos a los participantes dominantes.</p></article>
+<article class="card"><h3>El chat como segundo escenario</h3><p>Filtrado previo por secretaría o co-moderación para su lectura oportuna.</p></article>
+<article class="card"><h3>Preguntas de contraste</h3><p>Solicitar a un panelista que responda a la posición de otro.</p></article>
+</div>
+<div class="fl cn"><button class="btn sm" data-d="-1" aria-label="Técnica anterior">←</button><button class="btn sm" data-d="1" aria-label="Técnica siguiente">→</button></div>
+
+<h3 class="rv" style="margin-top:3rem">Gestión del tiempo</h3>
+<div class="card tm rv"><div><p>La secretaría técnica aplica el control cronológico con señales visibles y discretas. La puntualidad es un indicador de efectividad: un foro que termina fuera de horario pierde audiencia y desgasta al equipo organizador.</p>
+<div class="fl"><label>Segundos <input class="num" id="tsec" type="number" min="5" max="600" value="30"></label><button class="btn sm" id="tgo">Iniciar</button><button class="btn sm" id="trs">Reiniciar</button></div></div>
+<svg class="ring" viewBox="0 0 120 120" role="timer" aria-label="Cronómetro de turno"><circle class="bg" cx="60" cy="60" r="54"/><circle class="fg" id="tfg" cx="60" cy="60" r="54"/><text id="ttx" x="60" y="68">0:30</text></svg></div>
+
+<h3 class="rv" style="margin-top:3rem">Protocolo de cierre</h3>
+<p class="rv lead">El cierre no es la finalización del tiempo, sino la producción de la síntesis. La moderación, con apoyo de la secretaría técnica, presenta:</p>
+<div class="grid">
+<article class="card rv"><h3>Puntos de acuerdo</h3><p>Convergencias identificadas.</p></article>
+<article class="card rv" style="transition-delay:.15s"><h3>Nudos críticos</h3><p>Disensos persistentes, documentados como tales.</p></article>
+<article class="card rv" style="transition-delay:.3s"><h3>Próximos pasos</h3><p>Destino de la información generada.</p></article>
+</div>
+<p class="rv" style="margin-top:1.2rem">La síntesis se valida en el momento por los asistentes, para asegurar que el acta refleje la voluntad real del foro.</p>
+</div></section>
+
+<!-- ===== FASE IV ===== -->
+<section id="fase4"><div class="wrap">
+<h2 class="rv">Fase IV — Post-foro y trazabilidad</h2>
+<p class="rv">Plazo recomendado para redactar y circular el acta: <span class="big cnt"><b data-n="48">0</b>-<b data-n="72">0</b>h</span></p>
+<div class="fw"><svg class="flow rv" viewBox="0 0 900 110" role="group" aria-label="Flujo post-foro: acta, circularización, publicación, informe final, evaluación">
+<g class="st" tabindex="0" role="button" aria-describedby="tip" data-t="Redacción del acta. Plazo recomendado: 48 a 72 horas."><rect x="10" y="28" width="140" height="54" rx="12"/><text x="80" y="60">Acta</text></g>
+<path class="ar" pathLength="1" d="M154 55H186M177 48L186 55L177 62" style="transition-delay:.3s"/>
+<g class="st" tabindex="0" role="button" aria-describedby="tip" data-t="Se circula a los panelistas solo para corregir errores factuales, no para reabrir el debate."><rect x="190" y="28" width="140" height="54" rx="12"/><text x="260" y="60">Circularización</text></g>
+<path class="ar" pathLength="1" d="M334 55H366M357 48L366 55L357 62" style="transition-delay:.6s"/>
+<g class="st" tabindex="0" role="button" aria-describedby="tip" data-t="Después se publica en los canales institucionales."><rect x="370" y="28" width="140" height="54" rx="12"/><text x="440" y="60">Publicación</text></g>
+<path class="ar" pathLength="1" d="M514 55H546M537 48L546 55L537 62" style="transition-delay:.9s"/>
+<g class="st" tabindex="0" role="button" aria-describedby="tip" data-t="En foros con mesas de trabajo, cada mesa emite un informe que se eleva al plenario o a la autoridad competente."><rect x="550" y="28" width="140" height="54" rx="12"/><text x="620" y="60">Informe final</text></g>
+<path class="ar" pathLength="1" d="M694 55H726M717 48L726 55L717 62" style="transition-delay:1.2s"/>
+<g class="st" tabindex="0" role="button" aria-describedby="tip" data-t="Evaluación interna del comité con los indicadores del documento de constitución."><rect x="730" y="28" width="140" height="54" rx="12"/><text x="800" y="60">Evaluación</text></g>
+</svg></div>
+<div id="tip" role="tooltip"></div>
+<div class="grid">
+<article class="card rv"><h3>Redacción y circularización del acta</h3><p>Plazo recomendado: 48 a 72 horas. El acta se circula a los panelistas exclusivamente para corregir errores factuales, no para reabrir el debate. Después se publica en los canales institucionales.</p></article>
+<article class="card rv" style="transition-delay:.15s"><h3>Informe final</h3><p>En foros con mesas de trabajo, cada mesa emite un informe final con sus conclusiones, que se eleva al plenario o a la autoridad competente. En foros de participación ciudadana, es el documento que vincula el foro con la toma de decisiones.</p></article>
+<article class="card rv" style="transition-delay:.3s"><h3>Evaluación de efectividad</h3><p>El comité organizador evalúa internamente, con los indicadores del documento de constitución:</p><ul><li>Cumplimiento de objetivos</li><li>Nivel y calidad de participación</li><li>Pertinencia de las preguntas formuladas</li><li>Incidencias técnicas o de dinámica</li><li>Oportunidad en la entrega de productos documentales</li></ul><p>Los resultados alimentan la mejora continua y se archivan con la memoria del foro.</p></article>
+</div>
+</div></section>
+
+<!-- ===== CHECKLISTS ===== -->
+<section id="checklists"><div class="wrap">
+<h2 class="rv">Instrumentos de apoyo: listas de verificación</h2>
+<div class="card rv" style="margin-bottom:1rem"><b>Progreso global <span id="gp">0%</span></b><div class="pb" style="margin:.6rem 0 1rem"><i id="gb"></i></div>
+<div class="fl" style="margin:0"><button class="btn sm" id="dl">Descargar mi checklist</button><button class="btn sm" id="rst">Reiniciar</button></div></div>
+<div class="cls">
+<article class="card rv"><h3>Pre-foro</h3><div class="pb"><i></i></div><p class="mu pct">0%</p><ul class="cl" data-k="pre"><li>Documento de constitución aprobado.</li><li>Objetivos verificables formulados.</li><li>Comité organizador conformado con funciones asignadas.</li><li>Plataforma o sede confirmada y probada.</li><li>Panelistas confirmados y relatorías recibidas.</li><li>Guion programático y preguntas detonadoras redactadas.</li><li>Reglas de participación comunicadas a los inscritos.</li><li>Mecanismo de registro y grabación definido.</li></ul></article>
+<article class="card rv"><h3>Durante el foro</h3><div class="pb"><i></i></div><p class="mu pct">0%</p><ul class="cl" data-k="dur"><li>Apertura protocolizada.</li><li>Control de tiempos activo.</li><li>Gestión de la palabra equilibrada.</li><li>Registro de intervenciones y preguntas.</li><li>Síntesis de cierre presentada y validada.</li></ul></article>
+<article class="card rv"><h3>Post-foro</h3><div class="pb"><i></i></div><p class="mu pct">0%</p><ul class="cl" data-k="pos"><li>Acta redactada y circularizada.</li><li>Correcciones factuales incorporadas.</li><li>Acta publicada.</li><li>Informes de mesas recibidos (si aplica).</li><li>Evaluación de efectividad realizada y archivada.</li></ul></article>
+</div>
+</div></section>
+
+<!-- ===== DISPOSICIONES FINALES ===== -->
+<section id="disposiciones"><div class="wrap ed">
+<h2 class="rv">Disposiciones finales</h2>
+<p class="rv">La efectividad de un foro es el resultado de la aplicación disciplinada de un método, no de la espontaneidad de los participantes.</p>
+<ul class="rv"><li>La moderación no cohíbe la palabra: la ordena para que sea inteligible.</li><li>La secretaría técnica no burocratiza: da fe pública de lo ocurrido.</li><li>La presidencia no decora: garantiza que el proceso llegue a puerto.</li></ul>
+<p class="rv">El criterio último de éxito es la existencia, al cierre del ciclo, de un documento escrito que transforme una conversación dispersa en un activo de conocimiento trazable para la organización o comunidad convocante.</p>
+</div></section>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer><div class="wrap"><h3>Resumen ejecutivo</h3>
+<p>Un foro efectivo genera síntesis verificables, acuerdos trazables y aprendizajes transferibles.</p>
+<p>Se mide por la calidad de sus productos documentales y la equidad en el acceso a la palabra.</p>
+<p>Todo parte de un objetivo accionable y de roles claramente definidos.</p>
+<ul><li><a class="ul" href="#marco">Marco conceptual</a></li><li><a class="ul" href="#fase1">Fase I</a></li><li><a class="ul" href="#roles">Roles</a></li><li><a class="ul" href="#fase3">Fase III</a></li><li><a class="ul" href="#fase4">Fase IV</a></li><li><a class="ul" href="#checklists">Checklists</a></li><li><a class="ul" href="#disposiciones">Disposiciones</a></li></ul>
+<p class="mu">Guía técnica v1.0</p>
+<a class="btn sm" href="#top">Volver arriba</a>
+</div></footer>
+
+<script>
+/* ===== UTILIDADES ===== */
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+
+/* ===== NAV HEIGHT DINÁMICO ===== */
+function syncNavHeight(){document.documentElement.style.setProperty('--navh',(nav.offsetHeight+8)+'px')}
+
+/* ===== HERO: TÍTULO PALABRA POR PALABRA ===== */
+const h1=$('h1');h1.setAttribute('aria-label',h1.textContent);
+h1.innerHTML=h1.textContent.split(' ').map((w,i)=>`<span class="w" aria-hidden="true" style="animation-delay:${i*.12}s">${w}</span>`).join(' ');
+
+/* ===== ANIMACIONES SCROLL: REVEAL Y CONTADORES ===== */
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15});
+$$('.rv').forEach(el=>io.observe(el));
+const co=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;co.unobserve(e.target);
+const n=+e.target.dataset.n,t0=performance.now();
+const f=t=>{const p=Math.min(1,(t-t0)/1200);e.target.textContent=rm?n:Math.round(n*p);if(p<1)requestAnimationFrame(f)};requestAnimationFrame(f)}));
+$$('.stats b').forEach(b=>{b.textContent=0;co.observe(b)});
+
+/* ===== NAVEGACIÓN Y PROGRESO ===== */
+const nav=$('nav'),bar=$('#bar'),hero=$('.hero'),pr=$('.pr'),tl=$('.tl');
+syncNavHeight();
+addEventListener('resize',syncNavHeight);
+function onScroll(){
+  const d=document.documentElement;
+  bar.style.transform=`scaleX(${scrollY/(d.scrollHeight-innerHeight)})`;
+  nav.classList.toggle('on',scrollY>hero.offsetHeight*.8);
+  const r=tl.getBoundingClientRect(),q=Math.min(1,Math.max(0,(innerHeight*.6-r.top)/r.height));
+  pr.style.strokeDashoffset=1-q;
+}
+addEventListener('scroll',()=>requestAnimationFrame(onScroll),{passive:true});onScroll();
+const so=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)$$('nav a').forEach(a=>a.classList.toggle('act',a.hash==='#'+e.target.id))}),{rootMargin:'-40% 0px -55% 0px'});
+$$('main section').forEach(s=>so.observe(s));
+
+/* ===== TIPOLOGÍA FILTRABLE ===== */
+$$('.filters .chip').forEach(b=>b.onclick=()=>{
+  $$('.filters .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  $$('.tc').forEach(c=>c.classList.toggle('off',b.dataset.f!=='all'&&c.dataset.k!==b.dataset.f));
+});
+
+/* ===== COMITÉ ORGANIZADOR ===== */
+$$('.org').forEach(b=>b.onclick=()=>{
+  $$('.org').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  $('#orgp').innerHTML=`<h4>${b.textContent}</h4><p>${b.nextElementSibling.textContent}</p>`;
+});
+
+/* ===== RUEDA DE ROLES ===== */
+const cards=$$('.role'),svg=$('#wheel'),pan=$('#wp');
+const pos=i=>{const a=(-90+i*60)*Math.PI/180;return[200+140*Math.cos(a),200+140*Math.sin(a)]};
+$('#nodes').innerHTML=cards.map((c,i)=>{const[x,y]=pos(i);
+  return `<g class="nd" tabindex="0" role="button" aria-pressed="false" aria-label="${c.dataset.s}" data-i="${i}" style="--c:${c.style.getPropertyValue('--c')}"><circle cx="${x}" cy="${y}" r="40"/><text x="${x}" y="${y+4}" aria-hidden="true">${c.dataset.s}</text></g>`}).join('');
+function pick(i){
+  $$('.nd').forEach(n=>{const on=+n.dataset.i===i;n.classList.toggle('on',on);n.setAttribute('aria-pressed',on)});
+  const[x0,y0]=pos(i),c=cards[i];
+  $('#links').innerHTML=cards.map((_,j)=>j===i?'':`<line x1="${x0}" y1="${y0}" x2="${pos(j)[0]}" y2="${pos(j)[1]}" pathLength="1"/>`).join('');
+  pan.style.setProperty('--c',c.style.getPropertyValue('--c'));
+  pan.innerHTML=`<h3>${$('h3',c).textContent}</h3>`+$('.badge',c).outerHTML+$('.body>div',c).innerHTML;
+}
+['click','mouseover','focusin'].forEach(ev=>svg.addEventListener(ev,e=>{const n=e.target.closest('.nd');if(n)pick(+n.dataset.i)}));
+svg.addEventListener('keydown',e=>{
+  const n=e.target.closest('.nd');
+  if(!n)return;
+  const i=+n.dataset.i;
+  if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(i)}
+  else if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();const nx=(i+1)%cards.length;pick(nx);$$('.nd')[nx].focus()}
+  else if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();const pv=(i-1+cards.length)%cards.length;pick(pv);$$('.nd')[pv].focus()}
+});
+pick(0);
+$$('.tgl .chip').forEach(b=>b.onclick=()=>{
+  $$('.tgl .chip').forEach(x=>x.setAttribute('aria-pressed',x===b));
+  $('.wheelv').classList.toggle('show',b.dataset.v==='wheel');
+  $('#cards').classList.toggle('hide',b.dataset.v==='wheel');
+});
+$('.wheelv').classList.add('show');
+$$('.tg').forEach(b=>b.onclick=()=>{
+  const c=b.closest('.role'),o=c.classList.toggle('open');
+  b.setAttribute('aria-expanded',o);b.textContent=o?'Ocultar funciones':'Ver funciones';
+});
+
+/* ===== MATRIZ FILTRABLE ===== */
+const fi=$$('.mf input'),mrows=$$('#mx tbody tr');
+fi.forEach(i=>i.oninput=()=>mrows.forEach(r=>{r.hidden=fi.some(x=>{const v=x.value.trim().toLowerCase();return v&&!r.cells[+x.dataset.c].textContent.toLowerCase().includes(v)})}));
+
+/* ===== SIMULADOR ===== */
+const SIM=[
+['Presidencia','El debate se desvía del orden del día y se estanca.',['Decidir sobre el ritmo del debate y resolver el procedimiento.','Dejar que la discusión siga sin intervenir.','Eliminar las intervenciones fuera de tema una por una.'],'La presidencia decide sobre el ritmo del debate cuando se desvía o estanca.'],
+['Moderación','Un participante domina la palabra y otros aún no han hablado.',['Contener al dominante y promover a los silentes.','Dejar que siga: así se gana tiempo.','Redactar el acta del bloque.'],'La moderación equilibra la participación.'],
+['Secretaría','Un panelista está por exceder su tiempo asignado.',['Aplicar el control cronológico con una señal visible y discreta.','Pedir al público que lo interrumpa.','Fijar el orden del día.'],'La secretaría técnica controla el tiempo con señales visibles y discretas.'],
+['Panelistas','Otro panelista defendió una posición que no compartes.',['Construir sobre sus ideas o refutarlas con datos.','Descalificar a la persona.','Esperar al acta para responder.'],'Se debate sobre ideas, no sobre personas.'],
+['Público','Quieres cuestionar un argumento expuesto.',['Formularlo como pregunta, no como discurso.','Exponer tu posición en un discurso largo.','Responder tú por el panelista.'],'Regla de oro: toda intervención del público es una pregunta.'],
+['Comité','La plataforma falla durante el evento.',['Asegurar el soporte técnico durante el evento.','Esperar a que el público lo resuelva.','Cambiar el objetivo del foro.'],'El comité asegura el soporte técnico durante el evento.']];
+const sr=$('#simr'),sp=$('#simo');
+sr.innerHTML=SIM.map((x,i)=>`<button class="chip" aria-pressed="false" data-i="${i}">${x[0]}</button>`).join('');
+sr.onclick=e=>{const b=e.target.closest('.chip');if(!b)return;const x=SIM[+b.dataset.i];
+  $$('.chip',sr).forEach(c=>c.setAttribute('aria-pressed',c===b));
+  $('#sims').innerHTML=`<b>Escenario:</b> ${x[1]} ¿Qué haces?`;
+  $('#simf').textContent='';sp.dataset.i=b.dataset.i;
+  sp.innerHTML=x[2].map((t,j)=>({t,ok:j===0})).sort(()=>Math.random()-.5).map(({t,ok})=>`<button class="opt" aria-pressed="false" data-ok="${ok?1:0}">${t}</button>`).join('')};
+sp.onclick=e=>{
+  const o=e.target.closest('.opt');if(!o)return;
+  const ok=o.dataset.ok==='1';
+  $$('.opt',sp).forEach(x=>{x.classList.remove('ok','no');x.setAttribute('aria-pressed','false')});
+  o.classList.add(ok?'ok':'no');o.setAttribute('aria-pressed','true');
+  $('#simf').textContent=ok?'✓ Correcto. '+SIM[+sp.dataset.i][3]:'✗ No es la acción esperada para este rol. Inténtalo de nuevo.';
+};
+
+/* ===== TARJETAS FLIP Y CARRUSEL ===== */
+$$('.flip').forEach(b=>b.onclick=()=>b.setAttribute('aria-pressed',b.classList.toggle('on')));
+$$('.cn .btn').forEach(b=>b.onclick=()=>$('#car').scrollBy({left:+b.dataset.d*$('#car').clientWidth*.8,behavior:rm?'auto':'smooth'}));
+
+/* ===== CRONÓMETRO ===== */
+const fg=$('#tfg'),tx=$('#ttx'),tgo=$('#tgo');let tm=null,rest=0,tend=0;
+const tot=()=>Math.max(5,Math.min(600,+$('#tsec').value||30));
+function tdraw(left){
+  const p=Math.min(1,1-left/tot()),s=Math.ceil(left);
+  fg.style.strokeDashoffset=339.3*(1-p);
+  fg.style.stroke=p<.6?'var(--c-pan)':p<.85?'var(--c-sec)':'var(--c-pres)';
+  tx.textContent=left<=0?'¡Tiempo!':(Math.floor(s/60)+':'+String(s%60).padStart(2,'0'));
+}
+function treset(){clearInterval(tm);tm=null;rest=tot();tdraw(rest);tgo.textContent='Iniciar'}
+tgo.onclick=()=>{
+  if(tm){clearInterval(tm);tm=null;tgo.textContent='Continuar';return}
+  if(rest<=0)treset();
+  tend=Date.now()+rest*1000;tgo.textContent='Pausar';
+  tm=setInterval(()=>{
+    rest=(tend-Date.now())/1000;
+    if(rest<=0){rest=0;clearInterval(tm);tm=null;tgo.textContent='Iniciar'}
+    tdraw(rest);
+  },250);
+};
+$('#trs').onclick=treset;$('#tsec').onchange=treset;treset();
+
+/* ===== FASE IV: CONTADOR Y TOOLTIPS ===== */
+$$('.cnt b').forEach(b=>{b.textContent=0;co.observe(b)});
+const tip=$('#tip');
+$$('.st').forEach(g=>{
+  const show=()=>{
+    const r=g.getBoundingClientRect();
+    tip.textContent=g.dataset.t;
+    tip.style.left=Math.max(8,Math.min(innerWidth-250,r.left+r.width/2-120))+'px';
+    tip.style.top=(r.bottom+8)+'px';
+    tip.classList.add('on');
+  };
+  const hide=()=>tip.classList.remove('on');
+  g.addEventListener('mouseenter',show);
+  g.addEventListener('focus',show);
+  g.addEventListener('mouseleave',hide);
+  g.addEventListener('blur',hide);
+});
+
+/* ===== CHECKLISTS ===== */
+const KEY='foro-ck';let st={};
+try{st=JSON.parse(localStorage.getItem(KEY))||{}}catch(e){}
+const CHK='<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="2" width="20" height="20" rx="6"/><path d="M7 12.5l3.5 3.5L17 9" pathLength="1"/></svg>';
+$$('.cl').forEach(u=>[...u.children].forEach((li,i)=>{
+  const id=u.dataset.k+i;
+  const label=li.textContent;
+  li.innerHTML=`<label class="ck"><input type="checkbox" data-id="${id}" aria-label="${label}"${st[id]?' checked':''}>${CHK}<span>${label}</span></label>`;
+}));
+const full={};
+function confetti(card){
+  const w=document.createElement('div');w.className='cf';w.setAttribute('aria-hidden','true');
+  for(let i=0;i<28;i++){
+    const s=document.createElement('i');
+    s.style.cssText=`left:${Math.random()*100}%;background:hsl(${Math.random()*360},85%,60%);--x:${(Math.random()-.5)*120}px;animation-delay:${Math.random()*.3}s`;
+    w.appendChild(s);
+  }
+  card.appendChild(w);setTimeout(()=>w.remove(),2200);
+}
+function upd(fire){
+  let T=0,D=0;
+  $$('.cl').forEach(u=>{
+    const bx=$$('input',u),d=bx.filter(x=>x.checked).length,c=u.closest('.card'),p=Math.round(100*d/bx.length);
+    T+=bx.length;D+=d;
+    $('.pb i',c).style.width=p+'%';$('.pct',c).textContent=p+'%';
+    if(fire&&p===100&&!full[u.dataset.k])confetti(c);
+    full[u.dataset.k]=p===100;
+  });
+  const g=Math.round(100*D/T);
+  $('#gb').style.width=g+'%';$('#gp').textContent=g+'%';
+}
+$$('.cl input').forEach(x=>x.onchange=()=>{
+  st[x.dataset.id]=x.checked;
+  try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}
+  upd(true);
+});
+$('#rst').onclick=()=>{
+  if(!confirm('¿Reiniciar todas las listas? Se borrará tu progreso.'))return;
+  st={};try{localStorage.removeItem(KEY)}catch(e){}
+  $$('.cl input').forEach(x=>x.checked=false);
+  upd(false);
+};
+$('#dl').onclick=()=>{
+  const L=['Mi checklist de foro efectivo',''];
+  $$('.cls .card').forEach(c=>{
+    L.push($('h3',c).textContent);
+    $$('.ck',c).forEach(l=>L.push(($('input',l).checked?'[x] ':'[ ] ')+$('span',l).textContent));
+    L.push('');
+  });
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([L.join('\n')],{type:'text/plain'}));
+  a.download='checklist-foro.txt';a.click();URL.revokeObjectURL(a.href);
+};
+upd(false);
+
+/* ===== MENÚ HAMBURGUESA ===== */
+const hb=$('.hb'),nl=$('#nl');
+const mclose=()=>{nl.classList.remove('open');hb.setAttribute('aria-expanded',false);hb.setAttribute('aria-label','Abrir menú')};
+hb.onclick=()=>{
+  const o=nl.classList.toggle('open');
+  hb.setAttribute('aria-expanded',o);
+  hb.setAttribute('aria-label',o?'Cerrar menú':'Abrir menú');
+};
+nl.onclick=e=>{if(e.target.closest('a'))mclose()};
+addEventListener('keydown',e=>{if(e.key==='Escape')mclose()});
+
+/* ===== CURSOR PERSONALIZADO (solo ratón, sin reduced-motion) ===== */
+if(matchMedia('(hover:hover) and (pointer:fine)').matches&&!rm){
+  const c=document.createElement('div');c.id='cur';c.setAttribute('aria-hidden','true');document.body.appendChild(c);
+  let cx=0,cy=0,px=0,py=0;
+  addEventListener('mousemove',e=>{px=e.clientX;py=e.clientY;c.style.opacity=1});
+  document.documentElement.addEventListener('mouseleave',()=>c.style.opacity=0);
+  document.addEventListener('mouseover',e=>c.classList.toggle('hv',!!e.target.closest('a,button,summary,label,input,.st,.nd,.opt')));
+  (function f(){cx+=(px-cx)*.2;cy+=(py-cy)*.2;c.style.transform=`translate(${cx}px,${cy}px)`;requestAnimationFrame(f)})();
+}
+
+/* ===== MICROINTERACCIÓN: RIPPLE ===== */
+$$('.btn').forEach(b=>b.addEventListener('click',e=>{
+  if(rm)return;
+  const r=b.getBoundingClientRect(),s=document.createElement('i');
+  s.className='rp';s.style.cssText=`left:${e.clientX-r.left}px;top:${e.clientY-r.top}px`;
+  b.appendChild(s);setTimeout(()=>s.remove(),600);
+}));
+</script>
+
+</body>
+  </html>
